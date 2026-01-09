@@ -8,7 +8,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className="bg-white">
+      <body className="bg-gray-900">
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>

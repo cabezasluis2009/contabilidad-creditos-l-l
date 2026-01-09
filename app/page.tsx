@@ -15,7 +15,7 @@ export default function HomePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white text-black flex items-center justify-center">
+      <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
         <h1 className="text-2xl">Cargando...</h1>
       </div>
     );
@@ -26,17 +26,17 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
-       <header className="bg-white text-black p-4 flex justify-between items-center border-b border-gray-200">
-        <h1 className="text-xl font-semibold">CRÉDITOS L&L</h1>
+    <div className="min-h-screen bg-gray-900">
+       <header className="bg-gray-800 text-white p-4 flex justify-between items-center shadow-md">
+        <h1 className="text-xl font-bold">CRÉDITOS L&L</h1>
         <button 
           onClick={handleLogout}
-          className="px-4 py-2 font-semibold text-red-600 bg-transparent border border-red-600 rounded-lg hover:bg-red-50 hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+          className="px-4 py-2 font-semibold text-white bg-red-600 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-red-500"
         >
           Cerrar Sesión
         </button>
       </header>
-      <main className="p-4">
+      <main>
         <CreditForm />
       </main>
     </div>

@@ -14,58 +14,71 @@ export default function Login() {
     e.preventDefault();
     setIsSubmitting(true);
     setError(null);
-
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (err: any) {
-      if (err.code === 'auth/wrong-password' || err.code === 'auth/user-not-found' || err.code === 'auth/invalid-credential') {
-        setError('El correo o la contraseña son incorrectos.');
-      } else {
-        setError('Ocurrió un error al iniciar sesión.');
-      }
+      setError('Credenciales incorrectas. Inténtalo de nuevo.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-white text-black flex flex-col items-center justify-center p-4">
-      <div className="w-full max-w-xs">
-        <h1 className="text-3xl font-semibold text-center mb-10">CRÉDITOS L&L</h1>
-        <form onSubmit={handleLogin} className="space-y-6">
+    <div className="min-h-screen bg-gray-900 text-gray-300 flex items-center justify-center p-4">
+      <div className="w-full max-w-sm p-8 space-y-4 bg-gray-800 rounded-2xl shadow-lg">
+        
+        <div className="flex flex-col items-center space-y-2">
+            <div className="w-20 h-20 bg-gray-700 rounded-full flex items-center justify-center mb-2 shadow-md">
+                <span className="text-3xl font-bold text-white">L&L</span>
+            </div>
+          <h1 className="text-2xl font-bold text-white">CRÉDITOS L&L</h1>
+          <p className="text-sm text-gray-400">Inicia sesión para administrar tu negocio</p>
+        </div>
+
+        <form onSubmit={handleLogin} className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+            <label htmlFor="email" className="block text-sm font-medium mb-1 text-gray-400">Email</label>
             <input
               id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-400 focus:border-gray-400 sm:text-sm"
+              className="w-full px-4 py-2 text-white bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+              placeholder="usuario@dominio.com"
             />
           </div>
+
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Contraseña</label>
+            <label htmlFor="password" className="block text-sm font-medium mb-1 text-gray-400">Contraseña</label>
             <input
               id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-400 focus:border-gray-400 sm:text-sm"
+              className="w-full px-4 py-2 text-white bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+              placeholder="••••••••"
             />
           </div>
+
+          {error && <p className="text-center text-red-400 text-sm">{error}</p>}
+
           <div>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-black bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 disabled:opacity-50"
+              className="w-full mt-2 px-4 py-2.5 font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-500 disabled:opacity-60"
             >
               {isSubmitting ? 'Ingresando...' : 'Iniciar Sesión'}
             </button>
           </div>
         </form>
-        {error && <p className="mt-4 text-center text-red-600 text-sm">{error}</p>}
+
+        <p className="text-xs text-center text-gray-500 pt-2">
+          Por favor, usa las credenciales proporcionadas por el administrador.
+        </p>
+
       </div>
     </div>
   );

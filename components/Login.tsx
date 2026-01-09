@@ -17,7 +17,6 @@ export default function Login() {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      // El estado de autenticación será manejado por un observer en el AuthProvider
     } catch (err: any) {
       if (err.code === 'auth/wrong-password' || err.code === 'auth/user-not-found' || err.code === 'auth/invalid-credential') {
         setError('El correo o la contraseña son incorrectos.');
@@ -30,49 +29,43 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center p-4">
-      <div className="w-full max-w-md p-8 space-y-6 bg-gray-800 rounded-xl shadow-lg">
-        <h1 className="text-4xl font-bold text-center tracking-wider">CRÉDITOS L&L</h1>
-
+    <div className="min-h-screen bg-white text-black flex flex-col items-center justify-center p-4">
+      <div className="w-full max-w-xs">
+        <h1 className="text-3xl font-semibold text-center mb-10">CRÉDITOS L&L</h1>
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
-            <label htmlFor="email" className="text-sm font-semibold">Correo Electrónico</label>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Correo Electrónico</label>
             <input
               id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-2 mt-2 text-white bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-              placeholder="tu@email.com"
+              className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-400 focus:border-gray-400 sm:text-sm"
             />
           </div>
-
           <div>
-            <label htmlFor="password" className="text-sm font-semibold">Contraseña</label>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Contraseña</label>
             <input
               id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-2 mt-2 text-white bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-              placeholder="••••••••"
+              className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-400 focus:border-gray-400 sm:text-sm"
             />
           </div>
-
           <div>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full px-4 py-2 font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-500 disabled:opacity-50"
+              className="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-black bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 disabled:opacity-50"
             >
               {isSubmitting ? 'Ingresando...' : 'Iniciar Sesión'}
             </button>
           </div>
         </form>
-
-        {error && <p className="mt-4 text-center text-red-400">{error}</p>}
+        {error && <p className="mt-4 text-center text-red-600 text-sm">{error}</p>}
       </div>
     </div>
   );
